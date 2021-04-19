@@ -1,40 +1,40 @@
 const router = require("express").Router();
-let Menu = require('../models/menu_model');
+let Resource = require('../models/resource_model');
 
-//get all menu items
+//get all resources 
 router.route('/').get((req, res) => {
-    Menu.find()
-        .then(menu => res.json(menu))
+    Resource.find()
+        .then(resource => res.json(resource))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//get only 1 menu item
+//get only 1 resource item
 router.route('/:id').get((req, res) => {
-    Menu.findById(req.params.id)
-        .then(menu => res.json(menu))
+    Resource.findById(req.params.id)
+        .then(resource => res.json(resource))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//adding a new item to  the menu
+//adding a new item to  the Resources
 router.route('/add').post((req, res) => {
 
     const { name, description, typetags, price } = req.body;
     
-    const newMenu = new Menu({
+    const newResource = new Resource({
         name,
         description,
         typetags,
         price
     });
 
-    newMenu.save()
-        .then(() => res.json('Added to the Menu!'))
+    newResource.save()
+        .then(() => res.json('Added to the Resources!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-//delete an item from the menu
+//delete an item from the Resources
 router.route('/:id').delete((req, res) => {
-    Menu.findByIdAndDelete(req.params.id)
+    Resource.findByIdAndDelete(req.params.id)
         .then(() => res.json("Item deleted!"))
         .catch(err => res.status(400).json('Error: ' + err));
 })

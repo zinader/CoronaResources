@@ -2,8 +2,8 @@ const mongoose = require ('mongoose');
 
 const Schema = mongoose.Schema;
 
-//menu information needed
-const menuSchema = new Schema({
+//Resource information needed
+const resourceSchema = new Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
     typetags: { type: [String]},
@@ -12,6 +12,6 @@ const menuSchema = new Schema({
     timestamps: true,
 });
 
-const Menu = mongoose.model('Menu', menuSchema);
+const Resource = mongoose.model('Resource', resourceSchema);
 
-module.exports = Menu;
+module.exports = Resource;
