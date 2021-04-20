@@ -21,12 +21,25 @@ router.route("/:id").get((req, res) => {
 router.route("/add").post((req, res) => {
   const { name, description, typetags, price } = req.body;
 
-  const newResource = new Resource({
-    name,
-    description,
-    typetags,
-    price,
-  });
+    const name = req.body.name;
+    const description = req.body.description;
+    const typetags = req.body.typetags;
+    const phone= req.body.phone;
+    const email=req.body.email;
+    const price=req.body.price;
+    const address=req.body.address;
+    const state = req.body.state;
+    
+    const newResource = new Resource({
+        name,
+        description,
+        typetags,
+        price,
+        phone,
+        email,
+        address,
+        state,
+    });
 
   newResource
     .save()
@@ -41,4 +54,13 @@ router.route("/:id").delete((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-export default router;
+//increment popularity 
+router.route('/upvote').post((req,res) =>{
+    var id = req.body.id;
+    Resource.findOneAndUpdate({_id :id}, {$inc : {popularity : 1}},{new:true})
+             .then(() => res.json("Upvoted"))
+             .catch(err => res.status(400).json('Error; '+ err));
+})
+module.exports = router;
+
+
