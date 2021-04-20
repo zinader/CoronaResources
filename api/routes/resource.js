@@ -1,22 +1,25 @@
-const router = require("express").Router();
-let Resource = require('../models/resource_model');
+import express from "express";
+const router = express.Router();
+import Resource from "../models/resource_model.js";
 
-//get all resources 
-router.route('/').get((req, res) => {
-    Resource.find()
-        .then(resource => res.json(resource))
-        .catch(err => res.status(400).json('Error: ' + err));
+//get all resources
+router.route("/").get((req, res) => {
+  //res.send("Resource Page");
+  Resource.find()
+    .then((resource) => res.json(resource))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 //get only 1 resource item
-router.route('/:id').get((req, res) => {
-    Resource.findById(req.params.id)
-        .then(resource => res.json(resource))
-        .catch(err => res.status(400).json('Error: ' + err));
+router.route("/:id").get((req, res) => {
+  Resource.findById(req.params.id)
+    .then((resource) => res.json(resource))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 //adding a new item to  the Resources
-router.route('/add').post((req, res) => {
+router.route("/add").post((req, res) => {
+  const { name, description, typetags, price } = req.body;
 
     const name = req.body.name;
     const description = req.body.description;
@@ -38,17 +41,18 @@ router.route('/add').post((req, res) => {
         state,
     });
 
-    newResource.save()
-        .then(() => res.json('Added to the Resources!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+  newResource
+    .save()
+    .then(() => res.json("Added to the Resources!"))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 //delete an item from the Resources
-router.route('/:id').delete((req, res) => {
-    Resource.findByIdAndDelete(req.params.id)
-        .then(() => res.json("Item deleted!"))
-        .catch(err => res.status(400).json('Error: ' + err));
-})
+router.route("/:id").delete((req, res) => {
+  Resource.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Item deleted!"))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
 
 //increment popularity 
 router.route('/upvote').post((req,res) =>{
@@ -58,3 +62,5 @@ router.route('/upvote').post((req,res) =>{
              .catch(err => res.status(400).json('Error; '+ err));
 })
 module.exports = router;
+
+
