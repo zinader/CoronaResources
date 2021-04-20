@@ -18,13 +18,17 @@ router.route('/:id').get((req, res) => {
 //adding a new item to  the Resources
 router.route('/add').post((req, res) => {
 
-    const { name, description, typetags, price } = req.body;
+    const { name, description, typetags, price ,phone,email,address,state} = req.body;
     
     const newResource = new Resource({
         name,
         description,
         typetags,
-        price
+        price,
+        phone,
+        email,
+        address,
+        state,
     });
 
     newResource.save()
@@ -39,4 +43,11 @@ router.route('/:id').delete((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
+//increment popularity 
+router.route('/').post((req,res) =>{
+    var id = req.body.id;
+    Resource.findOneAndUpdate({_id :id}, {$inc : {'Resource.popularity' : 1}},{new:true})
+             .then(() => res.json("Upvoted"))
+             .catch(err => res.status(400).json('Error; '+ err));
+})
 module.exports = router;
