@@ -1,8 +1,6 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-
-const dbKey = require("./config/keys").MONGODB_URI
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
 
 // setup express
 const app = express();
@@ -11,23 +9,25 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.get("/",(req, res)=> res.status(200).send("Hi hello!"));
+app.get("/", (req, res) => res.status(200).send("Hi hello!"));
 
 console.log("Starting Server");
 app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running on port: ${port}`);
 });
 
-const resourceRouter = require('./routes/resource');
-app.use('/resource',resourceRouter);
+import router from "./routes/resource.js";
+
+app.use("/resource", router);
 
 //setup mongoose
 console.log("Connecting to MongoDB");
 
-mongoose.connect( dbKey, 
-    { useNewUrlParser: true, useCreateIndex:true, useUnifiedTopology: true },
-    err => {
-        if (err) return console.error(err);
-        console.log("MongoDB connection established");
-    });
-
+mongoose.connect(
+  "mongodb+srv://pulkit0786:covid123@cluster0.dcbg2.mongodb.net/MyFirstDatabase?retryWrites=true&w=majority",
+  { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
+  (err) => {
+    if (err) return console.error(err);
+    console.log("MongoDB connection established");
+  }
+);
