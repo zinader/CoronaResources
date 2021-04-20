@@ -4,7 +4,7 @@ import Resource from "../models/resource_model.js";
 
 //get all resources
 router.route("/").get((req, res) => {
-  res.send("Resource Page");
+  //res.send("Resource Page");
   Resource.find()
     .then((resource) => res.json(resource))
     .catch((err) => res.status(400).json("Error: " + err));
