@@ -19,26 +19,30 @@ router.route("/:id").get((req, res) => {
 
 //adding a new item to  the Resources
 router.route("/add").post((req, res) => {
-  const { name, description, typetags, price } = req.body;
-
+  
+    const resourceType = req.body.resourceType;
+    const resourceName = req.body.resourceName;
     const name = req.body.name;
     const description = req.body.description;
-    const typetags = req.body.typetags;
     const phone= req.body.phone;
     const email=req.body.email;
-    const price=req.body.price;
-    const address=req.body.address;
+    const location=req.body.location;
     const state = req.body.state;
+    const links = req.body.website;
+    const status = req.body.status;
     
     const newResource = new Resource({
+        
+        resourceName,
+        resourceType,
         name,
         description,
-        typetags,
-        price,
         phone,
         email,
-        address,
+        location,
         state,
+        links,
+        status
     });
 
   newResource
@@ -61,6 +65,6 @@ router.route('/upvote').post((req,res) =>{
              .then(() => res.json("Upvoted"))
              .catch(err => res.status(400).json('Error; '+ err));
 })
-module.exports = router;
 
+export default router;
 
