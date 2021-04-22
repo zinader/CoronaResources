@@ -1,11 +1,11 @@
 import "./App.css";
-import Main from "./components/Main";
+import MainComponent from "./components/MainComponent";
 
 function App() {
   return (
     <div className="App">
       <h1>Covid Resources</h1>
-      <Main />
+      <MainComponent />
     </div>
   );
 }

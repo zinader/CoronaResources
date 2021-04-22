@@ -4,9 +4,9 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import axios from "axios";
 import CardComponent from "./CardComponent";
 
-const Main = () => {
-  const [state, setState] = useState(null);
-  const [resources, setResources] = useState(null);
+const MainComponent = () => {
+  const [state, setState] = useState("");
+  const [resources, setResources] = useState([]);
 
   const handleSelect = () => {
     const fetchData = async () => {
@@ -34,9 +34,10 @@ const Main = () => {
           </Dropdown.Item>
         </DropdownButton>
       </div>
+
       <CardComponent resources={resources} />
     </>
   );
 };
 
-export default Main;
+export default MainComponent;

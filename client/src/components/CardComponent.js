@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import React from "react";
 import { Button, Card } from "react-bootstrap";
 
@@ -12,28 +11,35 @@ const CardComponent = ({ resources }) => {
 
   return (
     <div>
-      {resources?.map((resource) => (
-        <>
-          <Card style={{ margin: "0 auto", width: "18rem" }}>
-            <Card.Body>
-              <Card.Title>{resource.name}</Card.Title>
-              <Card.Text>{resource?.phone}</Card.Text>
-              <Card.Subtitle className="mb-2 text-muted">
-                Upvotes: {resource.popularity} , {resource?.location}
-              </Card.Subtitle>
-              <Card.Text>{resource?.resourceName}</Card.Text>
-              <Button
-                style={{ margin: "0 1rem" }}
-                onClick={() => upvoteHandler(resource._id)}
-              >
-                Upvote
-              </Button>
-              <Button>Mark Obsolete</Button>
-            </Card.Body>
-          </Card>
-          <br />
-        </>
-      ))}
+      {resources
+        ?.sort(
+          (
+            { popularity: previousPopularity },
+            { popularity: currentPopularity }
+          ) => currentPopularity - previousPopularity
+        )
+        .map((resource) => (
+          <>
+            <Card style={{ margin: "0 auto", width: "18rem" }}>
+              <Card.Body>
+                <Card.Title>{resource.resourceName}</Card.Title>
+                <Card.Text>{resource?.phone}</Card.Text>
+                <Card.Subtitle className="mb-2 text-muted">
+                  Upvotes: {resource.popularity} , {resource?.location}
+                </Card.Subtitle>
+                <Card.Text>{resource?.name}</Card.Text>
+                <Button
+                  style={{ margin: "0 1rem" }}
+                  onClick={() => upvoteHandler(resource._id)}
+                >
+                  Upvote
+                </Button>
+                <Button>Mark Obsolete</Button>
+              </Card.Body>
+            </Card>
+            <br />
+          </>
+        ))}
     </div>
   );
 };
