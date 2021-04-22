@@ -6,7 +6,7 @@ import Resource from "../models/resource_model.js";
 router.route("/").get((req, res) => {
   //res.send("Resource Page");
  
-     Resource.find({}, function(err, result) {
+    Resource.find({}, function(err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -15,12 +15,11 @@ router.route("/").get((req, res) => {
     })
     .sort({ popularity: -1 });
 
-   
 });
 
-//get only 1 resource item
-router.route("/:id").get((req, res) => {
-  Resource.findById(req.params.id)
+
+router.route("/:state").get((req, res) => {
+  Resource.find({state:req.params.state})
     .then((resource) => res.json(resource))
     .catch((err) => res.status(400).json("Error: " + err));
 });
