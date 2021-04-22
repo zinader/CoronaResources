@@ -4,23 +4,26 @@ import Resource from "../models/resource_model.js";
 
 //get all resources
 router.route("/").get((req, res) => {
-  //res.send("Resource Page");
- 
-    Resource.find({}, function(err, result) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.json(result);
-      }
-    })
-    .sort({ popularity: -1 });
+    Resource.find()
+    .sort({ popularity: -1 })
+    .then(result => res.json({
+      success: true,
+      data: result
+    }))
+    .catch(err => res.json({
+      success: false,
+      error: err
+    }))
 
 });
 
 
-router.route("/:state").get((req, res) => {
-  Resource.find({state:req.params.state})
-    .then((resource) => res.json(resource))
+router.route("/:state/:resource").get((req, res) => {
+  Resource.find({
+    state: req.params.state,
+    resourceName: req.params.resource
+  })
+    .sort({popularity: -1, })
     .catch((err) => res.status(400).json("Error: " + err));
 });
 

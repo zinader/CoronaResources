@@ -27,6 +27,9 @@ const resourceSchema = new Schema(
     state:{type:String,required:true},
     links:{type: Array,required:false},
     status:{type: Boolean,default:true,required:true},
+  },
+  {
+    timestamps: true
   }
 );
 
