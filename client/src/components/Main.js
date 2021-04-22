@@ -19,6 +19,16 @@ const Main = () => {
     console.log(resources);
   };
 
+  const renderCards = () => {
+    return(
+      resources.map((resource)=>{
+        return(
+          <CardComponent resource={resource} />
+        )
+      })
+    )
+  }
+
   return (
     <>
       <div>
@@ -34,7 +44,7 @@ const Main = () => {
           </Dropdown.Item>
         </DropdownButton>
       </div>
-      <CardComponent resources={resources} />
+      {resources?renderCards():null}
     </>
   );
 };
