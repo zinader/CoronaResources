@@ -11,7 +11,7 @@ var validateEmail = function(email) {
 const resourceSchema = new Schema(
   {
 
-  	resourceType: { type: String, required: true },
+  	resourceType: { type: Number, required: true },
   	resourceName: { type: String, required: true },
     name: { type: String, required: false },
     description: { type: String, required: false },

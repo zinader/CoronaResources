@@ -21,9 +21,13 @@ router.route("/").get((req, res) => {
 router.route("/:state/:resource").get((req, res) => {
   Resource.find({
     state: req.params.state,
-    resourceName: req.params.resource
+    resourceType: Number(req.params.resource)
   })
-    .sort({popularity: -1, })
+    .sort({popularity: -1,updatedAt: -1})
+    .then(result => res.json({
+      success: true,
+      data: result
+    }))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -72,8 +76,32 @@ router.route("/:id").delete((req, res) => {
 router.route('/upvote').post((req,res) =>{
     var id = req.body.id;
     Resource.findOneAndUpdate({_id :id}, {$inc : {popularity : 1}},{new:true})
-             .then(() => res.json("Upvoted"))
-             .catch(err => res.status(400).json('Error; '+ err));
+             .then((response) => res.json({
+               success: true,
+               data: response
+             }))
+             .catch(err => res.json({
+               success: false,
+               error: err
+             }));
+})
+
+router.route('/stash/:id').post((req, res)=>{
+    const id = req.params.id
+    console.log(id)
+    Resource.findOneAndUpdate(
+      {_id: id},
+      { status: false},
+      (err, response) => {
+        response?res.json({
+          success: true,
+          data: response
+        }):res.json({
+          success: false,
+          error: err
+        })
+      }
+    )
 })
 
 export default router;
