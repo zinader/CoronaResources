@@ -11,12 +11,12 @@ var validateEmail = function(email) {
 const resourceSchema = new Schema(
   {
 
-  	resourceType: { type: String, required: true },
+  	resourceType: { type: Number, required: true },
   	resourceName: { type: String, required: true },
     name: { type: String, required: false },
     description: { type: String, required: false },
     popularity:{type:Number,default:0},
-    phone: {type: String , trim: true,required:false},
+    phone: {type: Array, trim: true,required:false},
     email:{type: String,
         trim: true,
         required:false,
@@ -27,6 +27,9 @@ const resourceSchema = new Schema(
     state:{type:String,required:true},
     links:{type: Array,required:false},
     status:{type: Boolean,default:true,required:true},
+  },
+  {
+    timestamps: true
   }
 );
 

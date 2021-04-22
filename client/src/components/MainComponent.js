@@ -11,8 +11,10 @@ const MainComponent = () => {
   const handleSelect = () => {
     const fetchData = async () => {
       await axios
+
         .get("http://127.0.0.1:5001/resource")
         .then((res) => setResources(res.data));
+
     };
 
     fetchData();
@@ -40,7 +42,9 @@ const MainComponent = () => {
           </Dropdown.Item>
         </DropdownButton>
       </div>
+
       {resources ? renderCards() : null}
+
     </>
   );
 };

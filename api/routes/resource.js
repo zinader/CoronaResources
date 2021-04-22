@@ -4,24 +4,30 @@ import Resource from "../models/resource_model.js";
 
 //get all resources
 router.route("/").get((req, res) => {
-  //res.send("Resource Page");
- 
-     Resource.find({}, function(err, result) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.json(result);
-      }
-    })
-    .sort({ popularity: -1 });
+    Resource.find()
+    .sort({ popularity: -1 })
+    .then(result => res.json({
+      success: true,
+      data: result
+    }))
+    .catch(err => res.json({
+      success: false,
+      error: err
+    }))
 
-   
 });
 
-//get only 1 resource item
-router.route("/:id").get((req, res) => {
-  Resource.findById(req.params.id)
-    .then((resource) => res.json(resource))
+
+router.route("/:state/:resource").get((req, res) => {
+  Resource.find({
+    state: req.params.state,
+    resourceType: Number(req.params.resource)
+  })
+    .sort({popularity: -1,updatedAt: -1})
+    .then(result => res.json({
+      success: true,
+      data: result
+    }))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -70,8 +76,32 @@ router.route("/:id").delete((req, res) => {
 router.route('/upvote').post((req,res) =>{
     var id = req.body.id;
     Resource.findOneAndUpdate({_id :id}, {$inc : {popularity : 1}},{new:true})
-             .then(() => res.json("Upvoted"))
-             .catch(err => res.status(400).json('Error; '+ err));
+             .then((response) => res.json({
+               success: true,
+               data: response
+             }))
+             .catch(err => res.json({
+               success: false,
+               error: err
+             }));
+})
+
+router.route('/stash/:id').post((req, res)=>{
+    const id = req.params.id
+    console.log(id)
+    Resource.findOneAndUpdate(
+      {_id: id},
+      { status: false},
+      (err, response) => {
+        response?res.json({
+          success: true,
+          data: response
+        }):res.json({
+          success: false,
+          error: err
+        })
+      }
+    )
 })
 
 export default router;

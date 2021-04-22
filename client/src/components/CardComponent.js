@@ -1,5 +1,7 @@
 import axios from "axios";
+
 import React, { useState, useEffect } from "react";
+
 import { Button, Card } from "react-bootstrap";
 import { BiTrendingUp } from "react-icons/bi";
 import { AiOutlineLink } from "react-icons/ai";
@@ -9,8 +11,8 @@ const CardComponent = (props) => {
   const [resource, setResource] = useState(null);
   const upvoteHandler = async (id) => {
     await axios
+
       .post("http://127.0.0.1:5001/resource/upvote", { id })
-      .then((res) => console.log("done"));
 
     setResource((prev) => ({
       ...prev,
@@ -18,10 +20,12 @@ const CardComponent = (props) => {
     }));
   };
 
+
   useEffect(async () => {
     setResource(props.resource);
     console.log(resource);
   }, []);
+
 
   if (resource) {
     return (
