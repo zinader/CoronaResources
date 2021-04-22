@@ -1,3 +1,5 @@
+@import 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;900&display=swap');
 .App {
   text-align: center;
 }
@@ -6,11 +8,86 @@
   height: 40vmin;
   pointer-events: none;
 }
+body{
+  background: #56CCF2!important;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.card{
+  height: 100% !important;
+  border-radius: 10px !important
+}
+.card-list{
+  font-family: 'Montserrat', sans-serif;
+}
+.card-list .col-md-4{
+  margin-bottom: 2rem !important;
+}
+.card .card-body{
+  text-align: left;
+  padding: 0rem 1.25rem 1.25rem 1.25rem;
+}
+.card-header a{
+  background: red !important;
+  color: #fff !important;
+  border-radius: 50%;
+  margin: .2rem;
+  padding: 0.5rem;
+}
+.card .location{
+  background: #133c5e;
+  border-radius: 10px;
+  color: #fff;
+  margin: 1rem auto;
+  font-weight: 600;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+
+}
+.stash-btn{
+  background: crimson !important;
+  border-radius: 10px !important;
+  color: #fff;
+  font-weight: 600 !important;
+  width: 50%;
+  margin:0.5rem;
+  border: none !important;
+}
+.trending{
+  font-size: 1.5rem !important;
+
+}
+.up-btn{
+  background: #0359c2 !important;
+  color: #fff !important;
+  margin:0.5rem;
+  border: none !important;
+  width: 50%;
+  font-weight: 600 !important;
+  border-radius: 10px !important;
+}
+.card-footer{
+  background: none !important; 
+  border-top: none !important;
+}
+.card .card-header{
+  border-bottom: none;
+  text-align: center;
+  background: none;
+}
+.card .card-header h2{
+  width: fit-content;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .App-header {

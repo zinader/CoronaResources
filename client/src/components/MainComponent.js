@@ -12,8 +12,8 @@ const MainComponent = () => {
     const fetchData = async () => {
       await axios
 
-        .get("http://127.0.0.1:5001/resource")
-        .then((res) => setResources(res.data));
+        .get("http://127.0.0.1:5000/resource")
+        .then((res) => setResources(res.data.data));
 
     };
 
@@ -43,7 +43,11 @@ const MainComponent = () => {
         </DropdownButton>
       </div>
 
-      {resources ? renderCards() : null}
+      <div class="container-fluid">
+        <div className='row card-list'>
+            {resources?renderCards():null}
+        </div>
+      </div>
 
     </>
   );
