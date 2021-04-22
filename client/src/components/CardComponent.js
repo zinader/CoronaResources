@@ -1,96 +1,68 @@
 import axios from "axios";
-<<<<<<< HEAD
-import React from "react";
-=======
-import React, {useState, useEffect} from "react";
->>>>>>> c4d27c2bc79e8a90bc7f73df98e3e20d6f357a40
+import React, { useState, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
+import { BiTrendingUp } from "react-icons/bi";
+import { AiOutlineLink } from "react-icons/ai";
+import { FiPhoneCall } from "react-icons/fi";
 
 const CardComponent = (props) => {
-
-  const [resource, setResource] = useState(null)
+  const [resource, setResource] = useState(null);
   const upvoteHandler = async (id) => {
     await axios
-      .post("http://127.0.0.1:5002/resource/upvote", { id })
+      .post("http://127.0.0.1:5001/resource/upvote", { id })
       .then((res) => console.log("done"));
-    
-    setResource((prev)=>({
+
+    setResource((prev) => ({
       ...prev,
-      popularity: resource.popularity++
-    }))
+      popularity: resource.popularity++,
+    }));
   };
 
-<<<<<<< HEAD
-  return (
-    <div>
-      {resources
-        ?.sort(
-          (
-            { popularity: previousPopularity },
-            { popularity: currentPopularity }
-          ) => currentPopularity - previousPopularity
-        )
-        .map((resource) => (
-          <>
-            <Card style={{ margin: "0 auto", width: "18rem" }}>
-              <Card.Body>
-                <Card.Title>{resource.resourceName}</Card.Title>
-                <Card.Text>{resource?.phone}</Card.Text>
-                <Card.Subtitle className="mb-2 text-muted">
-                  Upvotes: {resource.popularity} , {resource?.location}
-                </Card.Subtitle>
-                <Card.Text>{resource?.name}</Card.Text>
-                <Button
-                  style={{ margin: "0 1rem" }}
-                  onClick={() => upvoteHandler(resource._id)}
-                >
-                  Upvote
-                </Button>
-                <Button>Mark Obsolete</Button>
-              </Card.Body>
-            </Card>
-            <br />
-          </>
-        ))}
-    </div>
-  );
-=======
-  useEffect(async() => {
-    setResource(props.resource)
-    console.log(resource)
-  },[])
+  useEffect(async () => {
+    setResource(props.resource);
+    console.log(resource);
+  }, []);
 
-  if(resource){
-    return(
+  if (resource) {
+    return (
       <div>
-        <Card style={{ margin: "0 auto", width: "18rem" }}>
+        <Card style={{ maxWidth: "30rem", margin: "auto" }}>
+          <Card.Header>
+            {resource?.resourceName?.split(" ")[0][0]}
+            {resource?.resourceName?.split(" ")[1][0]}
+          </Card.Header>
+          <div style={{ position: "absolute", right: "1rem", top: "10px" }}>
+            <BiTrendingUp /> {resource.popularity}
+          </div>
           <Card.Body>
             <Card.Title>{resource.name}</Card.Title>
-            <Card.Text>{resource?.phone}</Card.Text>
-            <Card.Subtitle className="mb-2 text-muted">
-              Upvotes: {resource.popularity} , {resource?.location}
-            </Card.Subtitle>
-            <Card.Text>{resource?.resourceName}</Card.Text>
-            <Button
-              style={{ margin: "0 1rem" }}
-              onClick={() => upvoteHandler(resource._id)}
-            >
-              Upvote
-            </Button>
-            <Button>Mark Obsolete</Button>
+            <a href={`tel:${resource.phone}`}>
+              <FiPhoneCall />
+            </a>
+            {resource.links.length > 0
+              ? resource.links.map((link) => (
+                  <a href={`http://${link}`} target="_blank">
+                    <AiOutlineLink />
+                  </a>
+                ))
+              : null}
+            <div>{resource.location}</div>
+
+            <Card.Text>{resource.description}</Card.Text>
           </Card.Body>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <Button>UPVOTE</Button>
+            <Button style={{ backgroundColor: "red" }}>INVALID</Button>
+          </div>
+          <Card.Footer>
+            <small className="text-muted">{resource?.updatedAt}</small>
+          </Card.Footer>
         </Card>
       </div>
-    )
+    );
+  } else {
+    return <div></div>;
   }
-  else{
-    return(
-      <div>
-
-      </div>
-    )
-  }
->>>>>>> c4d27c2bc79e8a90bc7f73df98e3e20d6f357a40
 };
 
 export default CardComponent;
