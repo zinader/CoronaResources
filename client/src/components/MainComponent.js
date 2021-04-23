@@ -15,6 +15,9 @@ const MainComponent = () => {
     "Ambulance",
     "Home Testing",
     "Plasma",
+    "Remdesivir",
+    "Fabiflu",
+    "Beds"
   ]);
 
   const handleSubmit = () => {

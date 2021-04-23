@@ -28,6 +28,12 @@ body{
   width: 80%;
   text-align: center;
 }
+.title h1 a{
+  color: #fff;
+}
+.title h1 a:hover{
+  text-decoration: none;
+}
 .title a{
   color: #133c5e;
   font-weight: 700;
@@ -247,16 +253,11 @@ body{
   bottom: 0.4rem;
   right: 0.5rem;
 }
-.footer{
-  /* background: rgba(0, 0, 0, 0.40); */
-  padding: 2.5rem;
+footer{
+  background: #000;
+  text-align: center;
+  padding: 1rem 1rem 0.5rem 1rem;
   color: #fff;
-}
-.footer h1{
-  font-weight: 700;
-}
-.footer .brief{
-  font-size: 1.5rem;
 }
 @media (max-width: 768px){
   .title{

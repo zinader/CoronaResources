@@ -14,7 +14,9 @@ function App() {
             <div className='col-md-6'> 
               <div className="title">
                 <h1>
-                  Covi<span className="high">Resources</span>
+                  <a href='/'>
+                    Covi<span className="high">Resources</span>
+                  </a>
                 </h1>
                 <p className='brief'>
                   A place where you can find all the help you need to fight this pandemic. We’re in this together. 
