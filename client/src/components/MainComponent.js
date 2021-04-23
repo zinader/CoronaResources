@@ -9,14 +9,20 @@ const MainComponent = () => {
   const [state, setState] = useState("");
   const [resources, setResources] = useState([]);
   const [resourceType, setType] = useState(null);
-  const [names, setNames] = useState(["", "Oxygen", "Ambulance", "Home Testing", "Plasma"])
+  const [names, setNames] = useState([
+    "",
+    "Oxygen",
+    "Ambulance",
+    "Home Testing",
+    "Plasma",
+  ]);
 
   const handleSubmit = () => {
-    const handleResource =(res) => {
-      setResources(null)
-      setResources(res.data.data)
-      console.log(res.data)
-    }
+    const handleResource = (res) => {
+      setResources(null);
+      setResources(res.data.data);
+      console.log(res.data);
+    };
     const fetchData = async () => {
       await axios
 
@@ -27,7 +33,7 @@ const MainComponent = () => {
         .then((res) => handleResource(res));
       // console.log(resources);
     };
-    console.log(state, resourceType)
+    console.log(state, resourceType);
     fetchData();
   };
 
@@ -67,6 +73,11 @@ const MainComponent = () => {
           <Dropdown.Item onClick={() => setType(null)}>All</Dropdown.Item>
           <Dropdown.Item onClick={() => setType(1)}>Oxygen</Dropdown.Item>
           <Dropdown.Item onClick={() => setType(2)}>Ambulance</Dropdown.Item>
+          <Dropdown.Item onClick={() => setType(3)}>Home Testing</Dropdown.Item>
+          <Dropdown.Item onClick={() => setType(4)}>Plasma</Dropdown.Item>
+          <Dropdown.Item onClick={() => setType(5)}>Remdesivir</Dropdown.Item>
+          <Dropdown.Item onClick={() => setType(6)}>Fabiflu</Dropdown.Item>
+          <Dropdown.Item onClick={() => setType(7)}>Beds</Dropdown.Item>
         </DropdownButton>
         <Button className="btn-search" onClick={() => handleSubmit()}>
           Search
