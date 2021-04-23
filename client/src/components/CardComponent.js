@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import React, { useState, useEffect } from "react";
-
+import { Link } from 'react-router-dom'
 import { Button, Card, Modal } from "react-bootstrap";
 import { BiTrendingUp } from "react-icons/bi";
 import { InlineShareButtons } from "sharethis-reactjs";
@@ -73,7 +73,16 @@ const CardComponent = (props) => {
               {resource?.resourceName?.split(" ")[0][0]}
               {resource?.resourceName?.split(" ")[1][0]}
             </h2>
-            <h3>{resource.name}</h3>
+            <h3>
+              {resource.name}
+              {/* {resource.links.length > 0
+                ? resource.links.map((link) => (
+                    <a className="link" href={`http://${link}`} target="_blank">
+                      <i className="fa fa-external-link-alt"></i>
+                    </a>
+                  ))
+                : null} */}
+            </h3>
 
             <div className="area">
               {resource.state ? (
@@ -82,17 +91,9 @@ const CardComponent = (props) => {
               {resource.location ? (
                 <p className="location">{resource.location}</p>
               ) : null}
+              <p className='location'>{resource.resourceName}</p>
             </div>
-            <a classname="tel" href={`tel:${resource.phone}`}>
-              <i className="fa fa-phone-alt"></i>
-            </a>
-            {resource.links.length > 0
-              ? resource.links.map((link) => (
-                  <a className="link" href={`http://${link}`} target="_blank">
-                    <i className="fa fa-external-link-alt"></i>
-                  </a>
-                ))
-              : null}
+
           </Card.Header>
           <div style={{ position: "absolute", right: "1rem", top: "10px" }}>
             <p className="trending">
@@ -101,7 +102,7 @@ const CardComponent = (props) => {
           </div>
           <div style={{ position: "absolute", left: "1rem", top: "10px" }}>
             <p className="stash">
-              <i onClick={() => setStash(true)} className="fa fa-times"></i>
+              <i onClick={() => setStash(true)} className="fa fa-2x fa-times"></i>
             </p>
             <Modal show={stash} onHide={() => setStash(false)}>
               <p>Are you sure you want to mark this lead spam?</p>
@@ -114,33 +115,25 @@ const CardComponent = (props) => {
           {resource.description ? (
             <p className="desc">{resource.description}</p>
           ) : null}
-          <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <a className="tel" href={`tel:${resource.phone}`}>
+              <i className="fa fa-phone-alt"></i>
+            </a>
             <Button
               className="up-btn"
               onClick={() => upvoteHandler(resource._id)}
             >
               UPVOTE
             </Button>
-            <InlineShareButtons
-              config={{
-                alignment: "center", // alignment of buttons (left, center, right)
-                color: "social", // set the color of buttons (social, white)
-                enabled: true, // show/hide buttons (true, false)
-                font_size: 16, // font size for the buttons
-                labels: "cta", // button labels (cta, counts, null)
-                language: "en", // which language to use (see LANGUAGES)
-                networks: [
-                  // which networks to include (see SHARING NETWORKS)
-                  "whatsapp",
-                ],
-                padding: 12, // padding within buttons (INTEGER)
-                radius: 4, // the corner radius on each button (INTEGER)
-                show_total: false,
-                size: 40, // the size of each button (INTEGER)
-
-                // OPTIONAL PARAMETERS
-              }}
-            />
+            <a class='whatsapp' href={`https://wa.me/?text="
+              Contact: ${resource.phone}
+              Resource: ${resource.resourceName}
+              State: ${resource.state}
+              Description: ${resource.description}
+              Location: ${resource.location}
+              Link: ${resource.links}"`}>
+              <i className='fa  fa-whatsapp'></i>
+            </a>
           </div>
           <Card.Footer>
             <small className="text-muted">{`updated ${handleTime(
