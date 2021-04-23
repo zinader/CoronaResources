@@ -36,7 +36,7 @@ const MainComponent = () => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:5000/resource")
+      .get("https://resourcecovid.herokuapp.com/resource")
       .then((res) => setResources(res.data.data));
   }, []);
 

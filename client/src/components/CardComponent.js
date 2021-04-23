@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { Button, Card, Modal } from "react-bootstrap";
 import { BiTrendingUp } from "react-icons/bi";
 import { InlineShareButtons } from "sharethis-reactjs";
@@ -91,9 +91,8 @@ const CardComponent = (props) => {
               {resource.location ? (
                 <p className="location">{resource.location}</p>
               ) : null}
-              <p className='location'>{resource.resourceName}</p>
+              <p className="location">{resource.resourceName}</p>
             </div>
-
           </Card.Header>
           <div style={{ position: "absolute", right: "1rem", top: "10px" }}>
             <p className="trending">
@@ -102,14 +101,23 @@ const CardComponent = (props) => {
           </div>
           <div style={{ position: "absolute", left: "1rem", top: "10px" }}>
             <p className="stash">
-              <i onClick={() => setStash(true)} className="fa fa-2x fa-times"></i>
+              <i
+                onClick={() => setStash(true)}
+                className="fa fa-2x fa-times"
+              ></i>
             </p>
             <Modal show={stash} onHide={() => setStash(false)}>
-              <i className='fa fa-times fa-5x'></i>
+              <i className="fa fa-times fa-5x"></i>
               <p>Are you sure you want to mark this lead spam?</p>
-              <div className='btns-area'>
-                <Button className='stash-confirm' onClick={() => stashLead()}>Yes</Button>
-                <Button color="red" className='stash-cancel' onClick={() => setStash(false)}>
+              <div className="btns-area">
+                <Button className="stash-confirm" onClick={() => stashLead()}>
+                  Yes
+                </Button>
+                <Button
+                  color="red"
+                  className="stash-cancel"
+                  onClick={() => setStash(false)}
+                >
                   Cancel
                 </Button>
               </div>
@@ -128,14 +136,17 @@ const CardComponent = (props) => {
             >
               UPVOTE
             </Button>
-            <a class='whatsapp' href={`https://wa.me/?text="
+            <a
+              class="whatsapp"
+              href={`https://wa.me/?text="
               Contact: ${resource.phone}
               Resource: ${resource.resourceName}
               State: ${resource.state}
               Description: ${resource.description}
               Location: ${resource.location}
-              Link: ${resource.links}"`}>
-              <i className='fa  fa-whatsapp'></i>
+              Link: ${resource.links}"`}
+            >
+              <i className="fa  fa-whatsapp"></i>
             </a>
           </div>
           <Card.Footer>
