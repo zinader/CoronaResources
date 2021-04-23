@@ -1,7 +1,7 @@
 @import 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;900&display=swap');
 .App {
-  text-align: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App-logo {
@@ -9,7 +9,7 @@
   pointer-events: none;
 }
 body{
-  background: #56CCF2!important;
+  /* background: #56CCF2!important; */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -17,10 +17,49 @@ body{
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.title{
+  padding: 2rem;
+  text-align: left;
+}
 
+.high{
+  font-weight: 700;
+  color: #0359c2;
+}
+.dropdown{
+  width: fit-content;
+  margin-right: 1rem;
+  display: inline-block;
+}
+.search-area{
+  text-align: left;
+  padding-left: 2rem;
+}
+.search-area .btn-search{
+  background: #133c5e;
+  border: none;
+}
+.search-area .btn-search:hover{
+  background: #fff;
+  color: #133c5e;
+  border: 1px solid #133c5e;
+}
+.dropdown button{
+  background: #fff;
+  color: #000;
+  border: 1px solid #133c5e;
+}
+.dropdown button:hover{
+  background: #133c5e;
+  color: #fff;
+  border: 1px solid #133c5e;
+}
 .card{
   height: 100% !important;
-  border-radius: 10px !important
+  border-radius: 10px !important;
+  background: whitesmoke !important;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /* border-radius: 6px; */
 }
 .card-list{
   font-family: 'Montserrat', sans-serif;
@@ -39,16 +78,30 @@ body{
   margin: .2rem;
   padding: 0.5rem;
 }
+.trending{
+  font-size: 1.5rem;
+}
+.fa-times{
+  color: red;
+}
 .card .location{
-  background: #133c5e;
+  background: #0359c2;
   border-radius: 10px;
   color: #fff;
-  margin: 1rem auto;
+  margin: 1rem;
+  display: inline-block;
   font-weight: 600;
   width: fit-content;
   padding: 0.5rem 1rem;
-
 }
+.desc{
+  padding: 1rem 2rem;
+  word-wrap: break-word;
+}
+.stash{
+  cursor: pointer;
+}
+
 .stash-btn{
   background: crimson !important;
   border-radius: 10px !important;
@@ -58,12 +111,8 @@ body{
   margin:0.5rem;
   border: none !important;
 }
-.trending{
-  font-size: 1.5rem !important;
-
-}
 .up-btn{
-  background: #0359c2 !important;
+  background: #028EC0 !important;
   color: #fff !important;
   margin:0.5rem;
   border: none !important;
