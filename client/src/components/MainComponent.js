@@ -9,23 +9,26 @@ const MainComponent = () => {
   const [state, setState] = useState("");
   const [resources, setResources] = useState([]);
   const [resourceType, setType] = useState(null);
+  const [names, setNames] = useState(["", "Oxygen", "Ambulance", "Home Testing", "Plasma"])
 
   const handleSubmit = () => {
+    const handleResource =(res) => {
+      setResources(null)
+      setResources(res.data.data)
+      console.log(res.data)
+    }
     const fetchData = async () => {
       await axios
 
-        .post(`http://127.0.0.1:5000/resource/filter/`, {
+        .post(`https://resourcecovid.herokuapp.com/resource/filter/`, {
           state: state,
           resourceType: resourceType,
         })
-        .then((res) => setResources(res.data.data));
-      console.log(resources);
+        .then((res) => handleResource(res));
+      // console.log(resources);
     };
-
-    console.log(`http://127.0.0.1:5000/resource/${state}/${resourceType}`);
-    console.log(state);
+    console.log(state, resourceType)
     fetchData();
-    console.log(resources);
   };
 
   const renderCards = () => {
@@ -58,7 +61,7 @@ const MainComponent = () => {
         <DropdownButton
           style={{ marginBottom: "2rem" }}
           id="dropdown-basic-button"
-          title={resourceType ? resourceType : "Select State"}
+          title={resourceType ? names[resourceType] : "Select Resource"}
           onSelect={(item) => console.log(item)}
         >
           <Dropdown.Item onClick={() => setType(null)}>All</Dropdown.Item>

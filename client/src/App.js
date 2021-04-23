@@ -12,8 +12,8 @@ function App() {
             Covi<span className="high">Resource</span>
           </h1>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua
+            A place where you can find all the help you need to fight this pandemic. We’re in this together. 
+            Share with your friends and family, your small step might save a life.
           </p>
         </div>
         <Route exact path="/" component={MainComponent} />

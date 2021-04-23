@@ -10,7 +10,7 @@ const CardComponent = (props) => {
   const [resource, setResource] = useState(null);
   const [stash, setStash] = useState(false);
   const upvoteHandler = async (id) => {
-    await axios.post("http://127.0.0.1:5000/resource/upvote", { id });
+    await axios.post("https://resourcecovid.herokuapp.com/resource/upvote", { id });
 
     setResource((prev) => ({
       ...prev,
@@ -45,7 +45,7 @@ const CardComponent = (props) => {
     };
 
     fetch(
-      `http://localhost:5000/resource/stash/${resource._id}`,
+      `https://resourcecovid.herokuapp.com/resource/stash/${resource._id}`,
       requestOptions
     )
       .then((response) => response.json())
@@ -126,30 +126,36 @@ const CardComponent = (props) => {
           {resource.description ? (
             <p className="desc">{resource.description}</p>
           ) : null}
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <a className="tel" href={`tel:${resource.phone}`}>
-              <i className="fa fa-phone-alt"></i>
-            </a>
-            <Button
-              className="up-btn"
-              onClick={() => upvoteHandler(resource._id)}
-            >
-              UPVOTE
-            </Button>
-            <a
-              class="whatsapp"
-              href={`https://wa.me/?text="
-              Contact: ${resource.phone}
-              Resource: ${resource.resourceName}
-              State: ${resource.state}
-              Description: ${resource.description}
-              Location: ${resource.location}
-              Link: ${resource.links}"`}
-            >
-              <i className="fa  fa-whatsapp"></i>
-            </a>
-          </div>
           <Card.Footer>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              {resource.phone?(
+                resource.phone.map((item) => {
+                  return(
+                    <a className="tel" href={`tel:${resource.phone}`}>
+                    <i className="fa fa-phone-alt"></i>
+                  </a>
+                  )
+                })
+              ):null}
+              <Button
+                className="up-btn"
+                onClick={() => upvoteHandler(resource._id)}
+              >
+                UPVOTE
+              </Button>
+              <a
+                class="whatsapp"
+                href={`https://wa.me/?text="
+                Contact: ${resource.phone}
+                Resource: ${resource.resourceName}
+                State: ${resource.state}
+                Description: ${resource.description}
+                Location: ${resource.location}
+                Link: ${resource.links}"`}
+              >
+                <i className="fa  fa-whatsapp"></i>
+              </a>
+            </div>
             <small className="text-muted">{`updated ${handleTime(
               resource.updatedAt
             )} minutes ago`}</small>
