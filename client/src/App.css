@@ -181,7 +181,34 @@ body{
 .App-link {
   color: #61dafb;
 }
-
+.modal-content{
+  padding: 1.5rem;
+  text-align: center !important;
+}
+.stash-confirm{
+  width: fit-content;
+  background: #028EC0 !important;
+  margin-right: 1rem;
+  border: none !important;
+  outline: none;
+}
+.stash-cancel{
+  background: red !important;
+  border: none !important;
+  outline: none;
+}
+.modal-content .fa-times{
+  color: red;
+}
+.add-page{
+  color: #fff;
+}
+.add-page label{
+  font-weight: 700;
+}
+.add-page h1{
+  font-weight: 700;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

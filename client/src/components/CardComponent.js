@@ -105,11 +105,14 @@ const CardComponent = (props) => {
               <i onClick={() => setStash(true)} className="fa fa-2x fa-times"></i>
             </p>
             <Modal show={stash} onHide={() => setStash(false)}>
+              <i className='fa fa-times fa-5x'></i>
               <p>Are you sure you want to mark this lead spam?</p>
-              <Button onClick={() => stashLead()}>Yes</Button>
-              <Button color="red" onClick={() => setStash(false)}>
-                Cancel
-              </Button>
+              <div className='btns-area'>
+                <Button className='stash-confirm' onClick={() => stashLead()}>Yes</Button>
+                <Button color="red" className='stash-cancel' onClick={() => setStash(false)}>
+                  Cancel
+                </Button>
+              </div>
             </Modal>
           </div>
           {resource.description ? (
