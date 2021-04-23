@@ -4,8 +4,10 @@ import Resource from "../models/resource_model.js";
 
 //get all resources
 router.route("/").get((req, res) => {
-    Resource.find()
-    .sort({ popularity: -1 })
+    Resource.find({
+      status: true
+    })
+    .sort({ popularity: -1, updatedAt: -1 })
     .then(result => res.json({
       success: true,
       data: result
@@ -18,17 +20,45 @@ router.route("/").get((req, res) => {
 });
 
 
-router.route("/:state/:resource").get((req, res) => {
-  Resource.find({
-    state: req.params.state,
-    resourceType: Number(req.params.resource)
-  })
+router.route("/filter/").post((req, res) => {
+
+  const {
+    state,
+    resourceType
+  } = req.body
+
+  var filters = null
+  if(state.length === 0 && !resourceType){
+    filters={
+      status: true,
+    }
+  }
+  else if(state.length === 0 && resourceType){
+    filters = {
+      resourceType: resourceType,
+      status: true
+    }
+  }
+  else if(state.length >= 1 && !resourceType){
+    filters = {
+      state: state,
+      status: true
+    }
+  }
+  else{
+    filters = {
+      state: state,
+      resourceType: resourceType,
+      status: true
+    }
+  }
+  Resource.find(filters)
     .sort({popularity: -1,updatedAt: -1})
     .then(result => res.json({
       success: true,
       data: result
     }))
-    .catch((err) => res.status(400).json("Error: " + err));
+    .catch((err) => console.log(err));
 });
 
 //adding a new item to  the Resources
