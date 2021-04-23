@@ -23,16 +23,25 @@ body{
   text-align: left;
   color: #fff;
 }
-.title p{
+.banner-img{
+  padding: 2rem;
+  width: 80%;
+  text-align: center;
+}
+.title a{
+  color: #133c5e;
   font-weight: 700;
-  width: 50%;
+}
+.title .brief{
+  font-weight: 500;
+  font-size: 1.5rem;
 }
 .title h1{
   font-weight: 700;
 }
 .high{
   font-weight: 700;
-  color: #000;
+  color: #133c5e;
 }
 .dropdown{
   width: fit-content;
@@ -131,7 +140,27 @@ body{
 .stash{
   cursor: pointer;
 }
-
+.upvote-modal p{
+  margin-top: 2rem;
+}
+.fa-check{
+  color: #fff;
+  background: #028EC0;
+  padding: 1rem;
+  border-radius: 100%;
+}
+.report-area{
+  margin-left: auto;
+  display: inline-flex;
+  justify-content: right;
+  width: 50%;
+}
+.report-btn{
+  color: red;
+  border-radius: 10px;
+  margin-left: auto;
+  padding: 0.5rem;
+}
 .stash-btn{
   background: crimson !important;
   border-radius: 10px !important;
@@ -166,7 +195,9 @@ body{
   margin-right: auto;
   padding: 1rem;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  font-weight: 700;
+  background: #028EC0;
 }
 
 .App-header {
@@ -211,11 +242,31 @@ body{
 .add-page h1{
   font-weight: 700;
 }
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.report-area{
+  position: absolute;
+  bottom: 0.4rem;
+  right: 0.5rem;
+}
+.footer{
+  /* background: rgba(0, 0, 0, 0.40); */
+  padding: 2.5rem;
+  color: #fff;
+}
+.footer h1{
+  font-weight: 700;
+}
+.footer .brief{
+  font-size: 1.5rem;
+}
+@media (max-width: 768px){
+  .title{
+    padding: 0.5rem;
   }
-  to {
-    transform: rotate(360deg);
+  .btn-search{
+    width: 50%;
+    display: block;
+  }
+  .search-area{
+    padding-left: 1rem;
   }
 }

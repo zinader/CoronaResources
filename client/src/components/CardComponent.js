@@ -1,23 +1,38 @@
 import axios from "axios";
-
+import { useDebouncedCallback } from 'use-debounce';
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Button, Card, Modal } from "react-bootstrap";
 import { BiTrendingUp } from "react-icons/bi";
-import { InlineShareButtons } from "sharethis-reactjs";
+
 
 const CardComponent = (props) => {
   const [resource, setResource] = useState(null);
   const [stash, setStash] = useState(false);
-  const upvoteHandler = async (id) => {
-    await axios.post("https://resourcecovid.herokuapp.com/resource/upvote", { id });
+  const [upvote, setUpvote] = useState(false)
+  function upvoteHandler(id){
+    axios.post("https://resourcecovid.herokuapp.com/resource/upvote", { id });
 
     setResource((prev) => ({
       ...prev,
       popularity: resource.popularity++,
     }));
+    console.log(id)
+    
   };
 
+  const handleDebounce = (id) => {
+    setUpvote(true)
+    debounced(id)
+  }
+
+  const debounced = useDebouncedCallback(
+    // function
+    (id) => {
+      upvoteHandler(id)
+    },
+    // delay in ms
+    5000
+  );
   const handleTime = (t) => {
     var d1 = new Date(t);
     var d2 = new Date();
@@ -75,15 +90,7 @@ const CardComponent = (props) => {
             </h2>
             <h3>
               {resource.name}
-              {/* {resource.links.length > 0
-                ? resource.links.map((link) => (
-                    <a className="link" href={`http://${link}`} target="_blank">
-                      <i className="fa fa-external-link-alt"></i>
-                    </a>
-                  ))
-                : null} */}
             </h3>
-
             <div className="area">
               {resource.state ? (
                 <p className="location">{resource.state}</p>
@@ -100,12 +107,6 @@ const CardComponent = (props) => {
             </p>
           </div>
           <div style={{ position: "absolute", left: "1rem", top: "10px" }}>
-            <p className="stash">
-              <i
-                onClick={() => setStash(true)}
-                className="fa fa-2x fa-times"
-              ></i>
-            </p>
             <Modal show={stash} onHide={() => setStash(false)}>
               <i className="fa fa-times fa-5x"></i>
               <p>Are you sure you want to mark this lead spam?</p>
@@ -137,9 +138,17 @@ const CardComponent = (props) => {
                   )
                 })
               ):null}
+              <Modal show={upvote} onHide={()=> setUpvote(false)}>
+                <div class='upvote-modal'>
+                  <i className='fa fa-5x fa-check'></i>
+                  <p>
+                    Thanks for you response!
+                  </p>
+                </div>
+              </Modal>
               <Button
                 className="up-btn"
-                onClick={() => upvoteHandler(resource._id)}
+                onClick={() => handleDebounce(resource._id)}
               >
                 UPVOTE
               </Button>
@@ -159,6 +168,11 @@ const CardComponent = (props) => {
             <small className="text-muted">{`updated ${handleTime(
               resource.updatedAt
             )} minutes ago`}</small>
+            <div className='report-area'>
+              <a className='report-btn' onClick={()=> setStash(true)}>
+                Report Lead
+              </a>
+            </div>
           </Card.Footer>
         </Card>
       </div>
