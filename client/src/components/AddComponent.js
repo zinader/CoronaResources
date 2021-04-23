@@ -4,7 +4,7 @@ import axios from "axios";
 
 const AddComponent = () => {
   const [resourceType, setResourceType] = useState(1);
-  const [resourceName, setResourceName] = useState("");
+  const [resourceName, setResourceName] = useState("Oxygen");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [phone, setPhone] = useState([]);
@@ -15,9 +15,10 @@ const AddComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const sendRequest = async () => {
       await axios
-        .post("http://127.0.0.1:5000/resource/add", {
+        .post("https://resourcecovid.herokuapp.com/resource/add", {
           resourceType,
           resourceName,
           name,
@@ -44,40 +45,60 @@ const AddComponent = () => {
     setWebsite([]);
   };
 
+  const setResource = (e) => {
+    if (e.target.value == 1) {
+      setResourceName("Oxygen");
+      setResourceType(1);
+    }
+    if (e.target.value == 2) {
+      setResourceName("Ambulance");
+      setResourceType(2);
+    }
+    if (e.target.value == 3) {
+      setResourceName("Home Testing");
+      setResourceType(3);
+    }
+    if (e.target.value == 4) {
+      setResourceName("Plasma");
+      setResourceType(4);
+    }
+    if (e.target.value == 5) {
+      setResourceName("Remdesivir");
+      setResourceType(5);
+    }
+    if (e.target.value == 6) {
+      setResourceName("Fabiflu");
+      setResourceType(6);
+    }
+    if (e.target.value == 7) {
+      setResourceName("Beds");
+      setResourceType(7);
+    }
+  };
+
   return (
-    <div className='add-page'>
+    <div className="add-page">
       <h1 style={{ textAlign: "center" }}>Add Resource</h1>
       <br />
-      <div className='container-fluid'>
-        <div className='row'>
-          <div className='col-md-8 offset-md-2 col-12'>
-          <Form
-              onSubmit={handleSubmit}
-            >
-              <Form.Group>
-                <Form.Label>Resource Type</Form.Label>
-                <Form.Control
-                  onChange={(e) => setResourceType(e.target.value)}
-                  required
-                  as="select"
-                >
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
-                </Form.Control>
-              </Form.Group>
-
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-8 offset-md-2 col-12">
+            <Form onSubmit={handleSubmit}>
               <Form.Group>
                 <Form.Label>Resource Name</Form.Label>
                 <Form.Control
                   required
-                  as='select'
+                  as="select"
                   placeholder="Enter Resource Name"
-                  onChange={(e) => setResourceName(e.target.value)}
+                  onChange={setResource}
                 >
-                  <option value={1}>1</option>
-                  <option value={2}>2</option>
-                  <option value={3}>3</option>
+                  <option value={1}>Oxygen</option>
+                  <option value={2}>Ambulance</option>
+                  <option value={3}>Home Testing</option>
+                  <option value={4}>Plasma</option>
+                  <option value={5}>Remdesivir</option>
+                  <option value={6}>Fabiflu</option>
+                  <option value={7}>Beds</option>
                 </Form.Control>
               </Form.Group>
 
