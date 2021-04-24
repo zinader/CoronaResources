@@ -84,9 +84,9 @@ const CardComponent = (props) => {
       <div className="col-md-4 col-12">
         <Card style={{ maxWidth: "30rem", margin: "auto" }}>
           <Card.Header>
-            <h2>
-              {resource?.resourceName?.split(" ")[0][0]}
-              {resource?.resourceName?.split(" ")[1][0]}
+            <h2 className='text-uppercase'>
+              {resource.resourceName.replace(" ", "")[0]}
+              {resource.resourceName.replace(" ", "")[1]}
             </h2>
             <h3>
               {resource.name}
