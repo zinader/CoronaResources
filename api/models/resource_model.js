@@ -16,6 +16,10 @@ const resourceSchema = new Schema(
     name: { type: String, required: false },
     description: { type: String, required: false },
     popularity:{type:Number,default:0},
+    address: {
+      type: String,
+      required: false
+    },
     phone: {type: Array, trim: true,required:false},
     email:{type: String,
         trim: true,

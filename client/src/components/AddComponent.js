@@ -8,6 +8,7 @@ const AddComponent = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [phone, setPhone] = useState([]);
+  const [address, setAddress] = useState(null)
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const [state, setState] = useState("");
@@ -26,6 +27,7 @@ const AddComponent = () => {
           phone,
           email,
           location,
+          address,
           state,
           website,
           status: true,
@@ -123,9 +125,17 @@ const AddComponent = () => {
               <Form.Group>
                 <Form.Label>Location</Form.Label>
                 <Form.Control
-                  required
                   type="text"
                   placeholder="Enter Location"
+                  onChange={(e) => setLocation(e.target.value)}
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label>Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Address"
                   onChange={(e) => setLocation(e.target.value)}
                 />
               </Form.Group>

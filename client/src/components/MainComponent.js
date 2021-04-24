@@ -37,7 +37,6 @@ const MainComponent = () => {
           resourceType: resourceType,
         })
         .then((res) => handleResource(res));
-      // console.log(resources);
 
       setLoader(false);
     }, 1000);

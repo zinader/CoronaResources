@@ -205,6 +205,9 @@ body {
   text-align: center;
   background: none;
 }
+.address{
+  padding: 0rem 2rem;
+}
 .card .card-header h2 {
   width: fit-content;
   text-align: center;
@@ -275,6 +278,13 @@ footer {
 @media (max-width: 768px) {
   .title {
     padding: 0.5rem;
+    word-wrap: break-word;
+  }
+  .title h1{
+    font-size: 2rem;
+  }
+  .title p{
+    font-size: 1rem;
   }
   .btn-search {
     width: 50%;

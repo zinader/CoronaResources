@@ -127,6 +127,9 @@ const CardComponent = (props) => {
           {resource.description ? (
             <p className="desc">{resource.description}</p>
           ) : null}
+          {resource.address ? (
+            <p className="address"> Address: <em>{resource.address}</em></p>
+          ) : null}
           <Card.Footer>
             <div style={{ display: "flex", justifyContent: "center" }}>
               {resource.phone?(
