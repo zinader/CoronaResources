@@ -15,7 +15,7 @@ function App() {
               <div className="title">
                 <h1>
                   <a href="/">
-                    Covi<span className="high">Resources</span>
+                    Corona<span className="high">Resources</span>
                   </a>
                 </h1>
                 <p className="brief">

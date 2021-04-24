@@ -154,7 +154,8 @@ const CardComponent = (props) => {
               </Button>
               <a
                 class="whatsapp"
-                href={`https://wa.me/?text=Contact: *${resource.phone?resource.phone:'-'}*%0aResource: *${resource.resourceName}*%0aState: *${resource.state}*%0aDescription: *${resource.description?resource.description:'-'}*%0aLocation: *${resource.location?resource.location:'-'}*%0aLink: *${resource.links?resource.links:'-'}*%0a_This resource was shared using *CoviResources*_`}
+                target='_blank'
+                href={`https://wa.me/?text=Contact: *${resource.phone?resource.phone:'-'}*%0aResource: *${resource.resourceName}*%0aState: *${resource.state}*%0aDescription: *${resource.description?resource.description:'-'}*%0aLocation: *${resource.location?resource.location:'-'}*%0aLink: *${resource.links.length>0?resource.links:'-'}*%0a_This resource was shared using *CoronaResources*_`}
               >
                 <i className="fa  fa-whatsapp"></i>
               </a>
