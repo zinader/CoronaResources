@@ -1,9 +1,9 @@
 import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import MainComponent from "./components/MainComponent";
 import AddComponent from "./components/AddComponent";
 import imgB from "./components/undraw_medical_care_movn.svg";
-import Footer from "./components/Footer";
+import Footer from "./components/footer";
 
 function App() {
   return (
@@ -36,6 +36,9 @@ function App() {
         </div>
         <Route exact path="/" component={MainComponent} />
         <Route exact path="/addresource" component={AddComponent} />
+        <Route path='*'>
+          <Redirect to='/' />
+        </Route>
       </div>
 
       <Footer />
