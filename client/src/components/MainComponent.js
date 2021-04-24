@@ -4,9 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { DropdownButton, Dropdown, Button } from "react-bootstrap";
 import axios from "axios";
 import CardComponent from "./CardComponent";
+import Loader from "./Loader";
 
 const MainComponent = () => {
   const [state, setState] = useState("");
+  const [loader, setLoader] = useState(true);
   const [resources, setResources] = useState([]);
   const [resourceType, setType] = useState(null);
   const [names, setNames] = useState([
@@ -17,7 +19,7 @@ const MainComponent = () => {
     "Plasma",
     "Remdesivir",
     "Fabiflu",
-    "Beds"
+    "Beds",
   ]);
 
   const handleSubmit = () => {
@@ -26,7 +28,8 @@ const MainComponent = () => {
       setResources(res.data.data);
       console.log(res.data);
     };
-    const fetchData = async () => {
+    setLoader(true);
+    setTimeout(async () => {
       await axios
 
         .post(`https://resourcecovid.herokuapp.com/resource/filter/`, {
@@ -35,21 +38,31 @@ const MainComponent = () => {
         })
         .then((res) => handleResource(res));
       // console.log(resources);
-    };
+
+      setLoader(false);
+    }, 1000);
+
     console.log(state, resourceType);
-    fetchData();
   };
 
   const renderCards = () => {
-    return resources.map((resource) => {
-      return <CardComponent resource={resource} />;
-    });
+    if (resources.length > 0) {
+      return resources.map((resource) => {
+        return <CardComponent resource={resource} />;
+      });
+    } else {
+      return <h1 className="col-12 text-center pt-5"> Sorry, Not Found</h1>;
+    }
   };
 
   useEffect(() => {
-    axios
-      .get("https://resourcecovid.herokuapp.com/resource")
-      .then((res) => setResources(res.data.data));
+    setLoader(true);
+    setTimeout(() => {
+      axios
+        .get("https://resourcecovid.herokuapp.com/resource")
+        .then((res) => setResources(res.data.data));
+    }, 1000);
+    setLoader(false);
   }, []);
 
   return (
@@ -93,10 +106,19 @@ const MainComponent = () => {
           Add Resource
         </Link>
       </div>
-
-      <div class="container-fluid">
-        <div className="row card-list">{resources ? renderCards() : null}</div>
-      </div>
+      {loader ? (
+        <div className="outer-container">
+          <Loader />
+        </div>
+      ) : (
+        <div className="outer-container">
+          <div class="container-fluid">
+            <div className="row card-list">
+              {resources ? renderCards() : null}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

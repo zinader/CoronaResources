@@ -1,16 +1,19 @@
-@import 'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;900&display=swap');
+@import "https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;700;900&display=swap");
 .App {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-body{
-  background: linear-gradient(to right, #7f00ff, #e100ff) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+body {
+  background: linear-gradient(
+    to right,
+    #7f00ff,
+    #e100ff
+  ) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -18,118 +21,121 @@ body{
     animation: App-logo-spin infinite 20s linear;
   }
 }
-.title{
+.title {
   padding: 2rem;
   text-align: left;
   color: #fff;
 }
-.banner-img{
+.banner-img {
   padding: 2rem;
   width: 80%;
   text-align: center;
 }
-.title h1 a{
+.title h1 a {
   color: #fff;
 }
-.title h1 a:hover{
+.title h1 a:hover {
   text-decoration: none;
 }
-.title a{
+.title a {
   color: #133c5e;
   font-weight: 700;
 }
-.title .brief{
+.title .brief {
   font-weight: 500;
   font-size: 1.5rem;
 }
-.title h1{
+.title h1 {
   font-weight: 700;
 }
-.high{
+.high {
   font-weight: 700;
   color: #133c5e;
 }
-.dropdown{
+.dropdown {
   width: fit-content;
   margin-right: 1rem;
   display: inline-block;
 }
-.search-area{
+.search-area {
   text-align: left;
   padding-left: 2rem;
   margin-bottom: 1.5rem;
 }
-.search-area .btn-search{
+.search-area .btn-search {
   background: #133c5e;
   border: none;
 }
-.search-area .btn-search:hover{
+.search-area .btn-search:hover {
   background: #fff;
   color: #133c5e;
   border: 1px solid #133c5e;
 }
-.dropdown button{
+.dropdown button {
   background: #fff;
   color: #000;
   border: 1px solid #133c5e;
 }
-.dropdown button:hover{
+.dropdown button:hover {
   background: #133c5e;
   color: #fff;
   border: 1px solid #133c5e;
 }
-.card{
+.card {
   height: 100% !important;
   border-radius: 10px !important;
   background: whitesmoke !important;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   /* border-radius: 6px; */
 }
-.card .whatsapp, .card .tel{
+.card .whatsapp,
+.card .tel {
   font-size: 1.5rem;
   font-weight: 700;
   border-radius: 5px;
   color: #fff;
   padding: initial 0.5rem;
-  background: #25D366;
+  background: #25d366;
   margin: 0.5rem;
 }
-.card .fa-whatsapp, .fa-phone-alt{
+.card .fa-whatsapp,
+.fa-phone-alt {
   padding: 0px 0.5rem;
 }
-.st-inline-share-buttons{
+.st-inline-share-buttons {
   height: 100%;
   margin: 0.5rem;
   border-radius: 100% !important;
 }
-.st-remove-label{
+.st-remove-label {
   display: block !important;
 }
-.card-list{
-  font-family: 'Montserrat', sans-serif;
+.card-list {
+  font-family: "Montserrat", sans-serif;
+  min-height: 50vh;
 }
-.card-list .col-md-4{
+.card-list .col-md-4 {
   margin-bottom: 2rem !important;
 }
-.card .card-body{
+.card .card-body {
   text-align: left;
   padding: 0rem 1.25rem 1.25rem 1.25rem;
 }
-.card-header a{
+.card-header a {
   background: red !important;
   color: #fff !important;
   border-radius: 50%;
   font-size: 1rem;
-  margin: .2rem;
+  margin: 0.2rem;
   padding: 0.5rem;
 }
-.trending{
+.trending {
   font-size: 1.5rem;
 }
-.fa-times{
+.fa-times {
   color: red;
 }
-.card .location{
+.card .location {
   background: #0359c2;
   border-radius: 10px;
   color: #fff;
@@ -139,62 +145,62 @@ body{
   width: fit-content;
   padding: 0.5rem 1rem;
 }
-.desc{
+.desc {
   padding: 1rem 2rem;
   word-wrap: break-word;
 }
-.stash{
+.stash {
   cursor: pointer;
 }
-.upvote-modal p{
+.upvote-modal p {
   margin-top: 2rem;
 }
-.fa-check{
+.fa-check {
   color: #fff;
-  background: #028EC0;
+  background: #028ec0;
   padding: 1rem;
   border-radius: 100%;
 }
-.report-area{
+.report-area {
   margin-left: auto;
   display: inline-flex;
   justify-content: right;
   width: 50%;
 }
-.report-btn{
+.report-btn {
   color: red;
   border-radius: 10px;
   margin-left: auto;
   padding: 0.5rem;
 }
-.stash-btn{
+.stash-btn {
   background: crimson !important;
   border-radius: 10px !important;
   color: #fff;
   font-weight: 600 !important;
   width: 50%;
-  margin:0.5rem;
+  margin: 0.5rem;
   border: none !important;
 }
-.up-btn{
-  background: #028EC0 !important;
+.up-btn {
+  background: #028ec0 !important;
   color: #fff !important;
-  margin:0.5rem;
+  margin: 0.5rem;
   border: none !important;
   width: 50%;
   font-weight: 600 !important;
   border-radius: 10px !important;
 }
-.card-footer{
-  background: none !important; 
+.card-footer {
+  background: none !important;
   border-top: none !important;
 }
-.card .card-header{
+.card .card-header {
   border-bottom: none;
   text-align: center;
   background: none;
 }
-.card .card-header h2{
+.card .card-header h2 {
   width: fit-content;
   text-align: center;
   margin-left: auto;
@@ -203,7 +209,7 @@ body{
   border-radius: 50%;
   color: #fff;
   font-weight: 700;
-  background: #028EC0;
+  background: #028ec0;
 }
 
 .App-header {
@@ -220,54 +226,60 @@ body{
 .App-link {
   color: #61dafb;
 }
-.modal-content{
+.modal-content {
   padding: 1.5rem;
   text-align: center !important;
 }
-.stash-confirm{
+.stash-confirm {
   width: fit-content;
-  background: #028EC0 !important;
+  background: #028ec0 !important;
   margin-right: 1rem;
   border: none !important;
   outline: none;
 }
-.stash-cancel{
+.stash-cancel {
   background: red !important;
   border: none !important;
   outline: none;
 }
-.modal-content .fa-times{
+.modal-content .fa-times {
   color: red;
 }
-.add-page{
+.add-page {
   color: #fff;
 }
-.add-page label{
+.add-page label {
   font-weight: 700;
 }
-.add-page h1{
+.add-page h1 {
   font-weight: 700;
 }
-.report-area{
+.report-area {
   position: absolute;
   bottom: 0.4rem;
   right: 0.5rem;
 }
-footer{
+footer {
+  width: 100%;
   background: #000;
   text-align: center;
   padding: 1rem 1rem 0.5rem 1rem;
   color: #fff;
 }
-@media (max-width: 768px){
-  .title{
+
+@media (max-width: 768px) {
+  .title {
     padding: 0.5rem;
   }
-  .btn-search{
+  .btn-search {
     width: 50%;
     display: block;
   }
-  .search-area{
+  .search-area {
     padding-left: 1rem;
   }
+}
+
+.outer-container {
+  min-height: 500px !important;
 }
