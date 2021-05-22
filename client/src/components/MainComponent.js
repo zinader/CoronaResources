@@ -17,16 +17,20 @@ const MainComponent = () => {
     "Ambulance",
     "Home Testing",
     "Plasma",
-    "Remdesivir",
-    "Fabiflu",
+    "",
+    "",
     "Beds",
+    "Medicine",
+    "Doctors",
+    "Mental Health",
+    "Food Services",
   ]);
 
   const handleSubmit = () => {
     const handleResource = (res) => {
       setResources(null);
       setResources(res.data.data);
-      console.log(res.data);
+      // console.log(res.data);
     };
     setLoader(true);
     setTimeout(async () => {
@@ -41,7 +45,7 @@ const MainComponent = () => {
       setLoader(false);
     }, 1000);
 
-    console.log(state, resourceType);
+    // console.log(state, resourceType);
   };
 
   const renderCards = () => {
@@ -50,7 +54,7 @@ const MainComponent = () => {
         return <CardComponent resource={resource} />;
       });
     } else {
-      return <h1 className="col-12 text-center pt-5"> Sorry, Not Found</h1>;
+      return <h1 className="col-12 text-center pt-5">Sorry, Not Found</h1>;
     }
   };
 
@@ -71,28 +75,51 @@ const MainComponent = () => {
           style={{ marginBottom: "2rem" }}
           id="dropdown-basic-button"
           title={state ? state : "Select State"}
-          onSelect={(item) => console.log(item)}
+          // onSelect={(item) => console.log(item)}
         >
           <Dropdown.Item onClick={() => setState("")}>All</Dropdown.Item>
           <Dropdown.Item onClick={() => setState("Delhi")}>Delhi</Dropdown.Item>
           <Dropdown.Item onClick={() => setState("Mumbai")}>
             Mumbai
           </Dropdown.Item>
+          <Dropdown.Item onClick={() => setState("Bengaluru")}>
+            Bengaluru
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setState("Chennai")}>
+            Chennai
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setState("NCR")}>NCR</Dropdown.Item>
+          <Dropdown.Item onClick={() => setState("Pune")}>Pune</Dropdown.Item>
+          <Dropdown.Item onClick={() => setState("Chandigarh")}>
+            Chandigarh
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setState("Uttrakhand")}>
+            Uttrakhand
+          </Dropdown.Item>
         </DropdownButton>
         <DropdownButton
           style={{ marginBottom: "2rem" }}
           id="dropdown-basic-button"
           title={resourceType ? names[resourceType] : "Select Resource"}
-          onSelect={(item) => console.log(item)}
+          // onSelect={(item) => console.log(item)}
         >
           <Dropdown.Item onClick={() => setType(null)}>All</Dropdown.Item>
           <Dropdown.Item onClick={() => setType(1)}>Oxygen</Dropdown.Item>
           <Dropdown.Item onClick={() => setType(2)}>Ambulance</Dropdown.Item>
           <Dropdown.Item onClick={() => setType(3)}>Home Testing</Dropdown.Item>
           <Dropdown.Item onClick={() => setType(4)}>Plasma</Dropdown.Item>
-          <Dropdown.Item onClick={() => setType(5)}>Remdesivir</Dropdown.Item>
-          <Dropdown.Item onClick={() => setType(6)}>Fabiflu</Dropdown.Item>
-          <Dropdown.Item onClick={() => setType(7)}>Beds</Dropdown.Item>
+          {/* <Dropdown.Item onClick={() => setType(7)}>Beds</Dropdown.Item> */}
+          <Dropdown.Item onClick={() => setType(8)}>Medicine</Dropdown.Item>
+          <Dropdown.Item onClick={() => setType(9)}>Doctors</Dropdown.Item>
+          <Dropdown.Item onClick={() => setType(10)}>
+            Mental Health
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setType(11)}>
+            Food Services
+          </Dropdown.Item>
+          <Dropdown.Item onClick={() => setType(12)}>
+            Home Services
+          </Dropdown.Item>
         </DropdownButton>
         <Button className="btn-search" onClick={() => handleSubmit()}>
           Search

@@ -43,7 +43,8 @@ body {
 }
 .title .brief {
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  color: rgb(167, 0, 0);
 }
 .title h1 {
   font-weight: 700;
@@ -101,7 +102,12 @@ body {
   background: #25d366;
   margin: 0.5rem;
 }
+.add-links{
+  color: whitesmoke;
+  font-weight: 700;
+}
 .card .fa-whatsapp,
+.fa-globe,
 .fa-phone-alt {
   padding: 0px 0.5rem;
 }
@@ -274,21 +280,43 @@ footer {
   padding: 1rem 1rem 0.5rem 1rem;
   color: #fff;
 }
-
+footer .fa-linkedin{
+  color: #fff;
+  margin-right: 1rem;
+  background: #0359c2;
+  border-radius: 100%;
+  padding: 0.6rem;
+}
 @media (max-width: 768px) {
   .title {
     padding: 0.5rem;
     word-wrap: break-word;
+  }
+  .btn-search{
+    width: 78% ;
+    margin-bottom: 1rem;
+  }
+  .search-area{
+    padding-left: 0px !important;
+  }
+  .search-area .btn-warning{
+    width: 78% ;
+    margin: 0rem !important
+  }
+  .search-area .dropdown{
+    width: 80%;
+  }
+  .search-area .dropdown button{
+    width: 100%;
+  }
+  .search-area{
+    text-align: center;
   }
   .title h1{
     font-size: 2rem;
   }
   .title p{
     font-size: 1rem;
-  }
-  .btn-search {
-    width: 50%;
-    display: block;
   }
   .search-area {
     padding-left: 1rem;

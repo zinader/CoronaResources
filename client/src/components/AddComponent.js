@@ -8,10 +8,10 @@ const AddComponent = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [phone, setPhone] = useState([]);
-  const [address, setAddress] = useState(null)
+  const [address, setAddress] = useState(null);
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
-  const [state, setState] = useState("");
+  const [state, setState] = useState("Delhi");
   const [website, setWebsite] = useState([]);
 
   const handleSubmit = (e) => {
@@ -76,6 +76,26 @@ const AddComponent = () => {
       setResourceName("Beds");
       setResourceType(7);
     }
+    if (e.target.value == 8) {
+      setResourceName("Medicine");
+      setResourceType(8);
+    }
+    if (e.target.value == 9) {
+      setResourceName("Doctors");
+      setResourceType(9);
+    }
+    if (e.target.value == 10) {
+      setResourceName("Mental Health");
+      setResourceType(10);
+    }
+    if (e.target.value == 11) {
+      setResourceName("Food Services");
+      setResourceType(11);
+    }
+    if (e.target.value == 12) {
+      setResourceName("Home Services");
+      setResourceType(11);
+    }
   };
 
   return (
@@ -98,9 +118,12 @@ const AddComponent = () => {
                   <option value={2}>Ambulance</option>
                   <option value={3}>Home Testing</option>
                   <option value={4}>Plasma</option>
-                  <option value={5}>Remdesivir</option>
-                  <option value={6}>Fabiflu</option>
-                  <option value={7}>Beds</option>
+                  {/* <option value={7}>Beds</option> */}
+                  <option value={8}>Medicine</option>
+                  <option value={9}>Doctors</option>
+                  <option value={10}>Mental Health</option>
+                  <option value={11}>Food Services</option>
+                  <option value={12}>Home Services</option>
                 </Form.Control>
               </Form.Group>
 
@@ -153,10 +176,23 @@ const AddComponent = () => {
                 <Form.Label>State</Form.Label>
                 <Form.Control
                   required
-                  type="text"
-                  placeholder="Enter State"
+                  as="select"
+                  placeholder="Enter State Name"
                   onChange={(e) => setState(e.target.value)}
-                />
+                >
+                  <option value={"Delhi"}>Delhi</option>
+                  <option value={"Mumbai"}>Mumbai</option>
+                  <option value={"Bengaluru"}>Bengaluru</option>
+                  <option value={"Pune"}>Pune</option>
+                  <option value={"Chandigarh"}>Chandigarh</option>
+                  <option value={"NCR"}>NCR</option>
+                  <option value={"Chennai"}>Chennai</option>
+                  <option value={"Uttrakhand"}>Uttrakhand</option>
+                  {/* <option value={8}>Medicine</option>
+                  <option value={9}>Doctors</option>
+                  <option value={10}>Mental Health</option>
+                  <option value={11}>Food Services</option> */}
+                </Form.Control>
               </Form.Group>
 
               <Form.Group>
@@ -178,7 +214,11 @@ const AddComponent = () => {
                 />
               </Form.Group>
 
-              <Button variant="primary" type="submit">
+              <Button
+                className="mb-5 text-center"
+                variant="primary"
+                type="submit"
+              >
                 Submit
               </Button>
             </Form>

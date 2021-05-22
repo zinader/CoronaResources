@@ -1,37 +1,35 @@
 import axios from "axios";
-import { useDebouncedCallback } from 'use-debounce';
+import { useDebouncedCallback } from "use-debounce";
 import React, { useState, useEffect } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
 import { BiTrendingUp } from "react-icons/bi";
 
-
 const CardComponent = (props) => {
   const [resource, setResource] = useState(null);
   const [stash, setStash] = useState(false);
-  const [upvote, setUpvote] = useState(false)
-  function upvoteHandler(id){
+  const [upvote, setUpvote] = useState(false);
+  function upvoteHandler(id) {
     axios.post("https://resourcecovid.herokuapp.com/resource/upvote", { id });
 
     setResource((prev) => ({
       ...prev,
       popularity: resource.popularity++,
     }));
-    console.log(id)
-    
-  };
+    // console.log(id);
+  }
 
   const handleDebounce = (id) => {
-    setUpvote(true)
-    debounced(id)
-  }
+    setUpvote(true);
+    debounced(id);
+  };
 
   const debounced = useDebouncedCallback(
     // function
     (id) => {
-      upvoteHandler(id)
+      upvoteHandler(id);
     },
     // delay in ms
-    5000
+    1000
   );
   const handleTime = (t) => {
     var d1 = new Date(t);
@@ -72,25 +70,23 @@ const CardComponent = (props) => {
 
   useEffect(async () => {
     setResource(props.resource);
-    console.log(resource);
+    // console.log(resource);
   }, []);
 
-  useEffect(() => {
-    console.log(resource?.status);
-  }, [stash]);
+  // useEffect(() => {
+  //   console.log(resource?.status);
+  // }, [stash]);
 
   if (resource) {
     return (
       <div className="col-md-4 col-12">
         <Card style={{ maxWidth: "30rem", margin: "auto" }}>
           <Card.Header>
-            <h2 className='text-uppercase'>
+            <h2 className="text-uppercase">
               {resource.resourceName.replace(" ", "")[0]}
               {resource.resourceName.replace(" ", "")[1]}
             </h2>
-            <h3>
-              {resource.name}
-            </h3>
+            <h3>{resource.name}</h3>
             <div className="area">
               {resource.state ? (
                 <p className="location">{resource.state}</p>
@@ -128,25 +124,31 @@ const CardComponent = (props) => {
             <p className="desc">{resource.description}</p>
           ) : null}
           {resource.address ? (
-            <p className="address"> Address: <em>{resource.address}</em></p>
+            <p className="address">
+              {" "}
+              Address: <em>{resource.address}</em>
+            </p>
           ) : null}
           <Card.Footer>
             <div style={{ display: "flex", justifyContent: "center" }}>
-              {resource.phone?(
-                resource.phone.map((item) => {
-                  return(
-                    <a className="tel" href={`tel:${resource.phone}`}>
-                    <i className="fa fa-phone-alt"></i>
-                  </a>
-                  )
-                })
-              ):null}
-              <Modal show={upvote} onHide={()=> setUpvote(false)}>
-                <div class='upvote-modal'>
-                  <i className='fa fa-5x fa-check'></i>
-                  <p>
-                    Thanks for you response!
-                  </p>
+              {resource.links[0] ? (
+                <a className="tel" href={`${resource.links[0]}`}>
+                  <i className="fa fa-globe"></i>
+                </a>
+              ) : null}
+              {resource.phone
+                ? resource.phone.map((item) => {
+                    return (
+                      <a className="tel" href={`tel:${resource.phone}`}>
+                        <i className="fa fa-phone-alt"></i>
+                      </a>
+                    );
+                  })
+                : null}
+              <Modal show={upvote} onHide={() => setUpvote(false)}>
+                <div class="upvote-modal">
+                  <i className="fa fa-5x fa-check"></i>
+                  <p>Thanks for you response!</p>
                 </div>
               </Modal>
               <Button
@@ -157,8 +159,20 @@ const CardComponent = (props) => {
               </Button>
               <a
                 class="whatsapp"
-                target='_blank'
-                href={`https://wa.me/?text=Contact: *${resource.phone?resource.phone:'-'}*%0aResource: *${resource.resourceName}*%0aState: *${resource.state}*%0aDescription: *${resource.description?resource.description:'-'}*%0aLocation: *${resource.location?resource.location:'-'}*%0aLink: *${resource.links.length>0?resource.links:'-'}*%0a_This resource was shared using *CoronaResources*_`}
+                target="_blank"
+                href={`https://wa.me/?text=Name: *${
+                  resource.name ? resource.name : "-"
+                }*%0aContact: *${
+                  resource.phone ? resource.phone : "-"
+                }*%0aResource: *${resource.resourceName}*%0aState: *${
+                  resource.state
+                }*%0aDescription: *${
+                  resource.description ? resource.description : "-"
+                }*%0aLocation: *${
+                  resource.location ? resource.location : "-"
+                }*%0aLink: *${
+                  resource.links.length > 0 ? resource.links : "-"
+                }*%0a_This resource was shared using *CoronaResources*_`}
               >
                 <i className="fa  fa-share-alt"></i>
               </a>
@@ -166,8 +180,8 @@ const CardComponent = (props) => {
             <small className="text-muted">{`updated ${handleTime(
               resource.updatedAt
             )} minutes ago`}</small>
-            <div className='report-area'>
-              <a className='report-btn' onClick={()=> setStash(true)}>
+            <div className="report-area">
+              <a className="report-btn" onClick={() => setStash(true)}>
                 Report
               </a>
             </div>
