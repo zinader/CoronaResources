@@ -2,32 +2,43 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 
-// setup express
-const app = express();
-const port = process.env.PORT || 5000;
+import resourceRouter from "./routes/resource.js";
+import dotenv from "dotenv";
 
+dotenv.config();
+
+// Setup express
+const app = express();
+const port = process.env.PORT || 7000;
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => res.status(200).send("Hi hello!"));
+// Home route
+app.get("/", (req, res) => {
+  res.status(200).send("Server is up!");
+});
 
-console.log("Starting Server");
+// Start the server
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
 
-import router from "./routes/resource.js";
-
-app.use("/resource", router);
-
-//setup mongoose
+// Connect to MongoDB
 console.log("Connecting to MongoDB");
 
 mongoose.connect(
-  "mongodb+srv://pulkit0786:covid123@cluster0.dcbg2.mongodb.net/MyFirstDatabase?retryWrites=true&w=majority",
+  process.env.MONGO_URI,
   { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true },
   (err) => {
-    if (err) return console.error(err);
+    if (err) {
+      console.error(err);
+      process.exit(1); // Exit the process if unable to connect to MongoDB
+    }
     console.log("MongoDB connection established");
   }
 );
+
+// Resource router
+app.use("/resource", resourceRouter);

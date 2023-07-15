@@ -2,145 +2,160 @@ import express from "express";
 const router = express.Router();
 import Resource from "../models/resource_model.js";
 
-//get all resources
-router.route("/").get((req, res) => {
-    Resource.find({
-      status: true
-    })
-    .sort({ popularity: -1, updatedAt: -1 })
-    .then(result => res.json({
+// Get all resources
+router.get("/", async (req, res) => {
+  try {
+    const result = await Resource.find({ status: true })
+      .sort({ popularity: -1, updatedAt: -1 })
+      .exec();
+
+    res.json({
       success: true,
-      data: result
-    }))
-    .catch(err => res.json({
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
       success: false,
-      error: err
-    }))
-
+      error: error.message,
+    });
+  }
 });
 
+// Filter resources
+router.post("/filter", async (req, res) => {
+  const { state, resourceType } = req.body;
 
-router.route("/filter/").post((req, res) => {
+  try {
+    let filters = {};
 
-  const {
-    state,
-    resourceType
-  } = req.body
+    if (state.length > 0) filters.state = state;
+    if (resourceType) filters.resourceType = resourceType;
+    filters.status = true;
 
-  var filters = null
-  if(state.length === 0 && !resourceType){
-    filters={
-      status: true,
-    }
-  }
-  else if(state.length === 0 && resourceType){
-    filters = {
-      resourceType: resourceType,
-      status: true
-    }
-  }
-  else if(state.length >= 1 && !resourceType){
-    filters = {
-      state: state,
-      status: true
-    }
-  }
-  else{
-    filters = {
-      state: state,
-      resourceType: resourceType,
-      status: true
-    }
-  }
-  Resource.find(filters)
-    .sort({popularity: -1,updatedAt: -1})
-    .then(result => res.json({
+    const result = await Resource.find(filters)
+      .sort({ popularity: -1, updatedAt: -1 })
+      .exec();
+
+    res.json({
       success: true,
-      data: result
-    }))
-    .catch((err) => console.log(err));
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
 });
 
-//adding a new item to  the Resources
-router.route("/add").post((req, res) => {
-  
-    const resourceType = req.body.resourceType;
-    const resourceName = req.body.resourceName;
-    const name = req.body.name;
-    const description = req.body.description;
-    const phone= req.body.phone;
-    const email=req.body.email;
-    const location=req.body.location;
-    const state = req.body.state;
-    const links = req.body.website;
-    const status = req.body.status;
-    
+// Add a new resource
+router.post("/add", async (req, res) => {
+  const {
+    resourceType,
+    resourceName,
+    name,
+    description,
+    phone,
+    email,
+    location,
+    state,
+    website,
+    status,
+  } = req.body;
+
+  try {
     const newResource = new Resource({
-        
-        resourceName,
-        resourceType,
-        name,
-        description,
-        phone,
-        email,
-        location,
-        state,
-        links,
-        status
+      resourceType,
+      resourceName,
+      name,
+      description,
+      phone,
+      email,
+      location,
+      state,
+      links: website,
+      status,
     });
 
-  newResource
-    .save()
-    .then(() => res.json("Added to the Resources!, To submit another response, refresh the page!"))
-    .catch((err) => res.status(400).json("Error: " + err));
+    await newResource.save();
+
+    res.json("Added to the Resources!");
+  } catch (error) {
+    res.status(400).json("Error: " + error.message);
+  }
 });
 
-//delete an item from the Resources
-router.route("/:id").delete((req, res) => {
-  Resource.findByIdAndDelete(req.params.id)
-    .then(() => res.json("Item deleted!"))
-    .catch((err) => res.status(400).json("Error: " + err));
+// Delete a resource
+router.delete("/:id", async (req, res) => {
+  try {
+    await Resource.findByIdAndDelete(req.params.id);
+    res.json("Item deleted!");
+  } catch (error) {
+    res.status(400).json("Error: " + error.message);
+  }
 });
 
-//increment popularity 
-router.route('/upvote').post((req,res) =>{
-    var id = req.body.id;
-    Resource.findOneAndUpdate({_id :id}, {$inc : {popularity : 1}},{new:true})
-             .then((response) => res.json({
-               success: true,
-               data: response
-             }))
-             .catch(err => res.json({
-               success: false,
-               error: err
-             }));
-})
+// Increment popularity
+router.post("/upvote", async (req, res) => {
+  const { id } = req.body;
 
-router.route('/stashed').get((req, res) => {
-  Resource.find({status: false})
-        .then(resources => res.json({
-          success: true,
-          data: resources
-        }))
-})
+  try {
+    const response = await Resource.findByIdAndUpdate(
+      id,
+      { $inc: { popularity: 1 } },
+      { new: true }
+    );
 
-router.route('/stash/:id').post((req, res)=>{
-    const id = req.params.id
-    console.log(id)
-    Resource.findOneAndUpdate(
-      {_id: id},
-      { $inc : {downvote : 1}},
-      (err, response) => {
-        response?res.json({
-          success: true,
-          data: response
-        }):res.json({
-          success: false,
-          error: err
-        })
-      }
-    )
-})
+    res.json({
+      success: true,
+      data: response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
+// Get stashed resources
+router.get("/stashed", async (req, res) => {
+  try {
+    const resources = await Resource.find({ status: false }).exec();
+
+    res.json({
+      success: true,
+      data: resources,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
+// Stash a resource
+router.post("/stash/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const response = await Resource.findByIdAndUpdate(
+      id,
+      { $inc: { downvote: 1 } },
+      { new: true }
+    );
+
+    res.json({
+      success: true,
+      data: response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+});
 
 export default router;
-

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import {
+  Redirect,
+  useHistory,
+} from "react-router-dom/cjs/react-router-dom.min";
 
 const AddComponent = () => {
   const [resourceType, setResourceType] = useState(1);
@@ -14,12 +18,14 @@ const AddComponent = () => {
   const [state, setState] = useState("Delhi");
   const [website, setWebsite] = useState([]);
 
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const sendRequest = async () => {
       await axios
-        .post("https://resourcecovid.herokuapp.com/resource/add", {
+        .post("http://localhost:5000/resource/add", {
           resourceType,
           resourceName,
           name,
@@ -45,6 +51,7 @@ const AddComponent = () => {
     setLocation("");
     setState("");
     setWebsite([]);
+    history.push("/");
   };
 
   const setResource = (e) => {
@@ -159,7 +166,7 @@ const AddComponent = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter Address"
-                  onChange={(e) => setLocation(e.target.value)}
+                  onChange={(e) => setAddress(e.target.value)}
                 />
               </Form.Group>
 

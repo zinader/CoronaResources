@@ -38,13 +38,13 @@ body {
   text-decoration: none;
 }
 .title a {
-  color: #133c5e;
+  color: #133551;
   font-weight: 700;
 }
 .title .brief {
   font-weight: 500;
   font-size: 1rem;
-  color: rgb(167, 0, 0);
+  color: rgb(240, 240, 240);
 }
 .title h1 {
   font-weight: 700;
@@ -89,7 +89,7 @@ body {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   /* border-radius: 6px; */
 }
-.card .fa-share-alt{
+.card .fa-share-alt {
   padding: 0rem 0.5rem !important;
 }
 .card .whatsapp,
@@ -102,7 +102,7 @@ body {
   background: #25d366;
   margin: 0.5rem;
 }
-.add-links{
+.add-links {
   color: whitesmoke;
   font-weight: 700;
 }
@@ -211,7 +211,7 @@ body {
   text-align: center;
   background: none;
 }
-.address{
+.address {
   padding: 0rem 2rem;
 }
 .card .card-header h2 {
@@ -280,7 +280,7 @@ footer {
   padding: 1rem 1rem 0.5rem 1rem;
   color: #fff;
 }
-footer .fa-linkedin{
+footer .fa-linkedin {
   color: #fff;
   margin-right: 1rem;
   background: #0359c2;
@@ -292,30 +292,30 @@ footer .fa-linkedin{
     padding: 0.5rem;
     word-wrap: break-word;
   }
-  .btn-search{
-    width: 78% ;
+  .btn-search {
+    width: 78%;
     margin-bottom: 1rem;
   }
-  .search-area{
+  .search-area {
     padding-left: 0px !important;
   }
-  .search-area .btn-warning{
-    width: 78% ;
-    margin: 0rem !important
+  .search-area .btn-warning {
+    width: 78%;
+    margin: 0rem !important;
   }
-  .search-area .dropdown{
+  .search-area .dropdown {
     width: 80%;
   }
-  .search-area .dropdown button{
+  .search-area .dropdown button {
     width: 100%;
   }
-  .search-area{
+  .search-area {
     text-align: center;
   }
-  .title h1{
+  .title h1 {
     font-size: 2rem;
   }
-  .title p{
+  .title p {
     font-size: 1rem;
   }
   .search-area {

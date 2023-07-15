@@ -3,13 +3,14 @@ import { useDebouncedCallback } from "use-debounce";
 import React, { useState, useEffect } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
 import { BiTrendingUp } from "react-icons/bi";
+import { environment } from "../environment";
 
 const CardComponent = (props) => {
   const [resource, setResource] = useState(null);
   const [stash, setStash] = useState(false);
   const [upvote, setUpvote] = useState(false);
   function upvoteHandler(id) {
-    axios.post("https://resourcecovid.herokuapp.com/resource/upvote", { id });
+    axios.post(`${environment.baseUrl}/resource/upvote`, { id });
 
     setResource((prev) => ({
       ...prev,
@@ -58,7 +59,7 @@ const CardComponent = (props) => {
     };
 
     fetch(
-      `https://resourcecovid.herokuapp.com/resource/stash/${resource._id}`,
+      `${environment.baseUrl}/resource/stash/${resource._id}`,
       requestOptions
     )
       .then((response) => response.json())

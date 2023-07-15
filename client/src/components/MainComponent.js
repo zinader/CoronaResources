@@ -5,6 +5,7 @@ import { DropdownButton, Dropdown, Button } from "react-bootstrap";
 import axios from "axios";
 import CardComponent from "./CardComponent";
 import Loader from "./Loader";
+import { environment } from "../environment";
 
 const MainComponent = () => {
   const [state, setState] = useState("");
@@ -35,8 +36,7 @@ const MainComponent = () => {
     setLoader(true);
     setTimeout(async () => {
       await axios
-
-        .post(`https://resourcecovid.herokuapp.com/resource/filter/`, {
+        .post(`${environment.baseUrl}/resource/filter/`, {
           state: state,
           resourceType: resourceType,
         })
@@ -54,7 +54,7 @@ const MainComponent = () => {
         return <CardComponent resource={resource} />;
       });
     } else {
-      return <h1 className="col-12 text-center pt-5">Sorry, Not Found</h1>;
+      return <Loader />;
     }
   };
 
@@ -62,7 +62,7 @@ const MainComponent = () => {
     setLoader(true);
     setTimeout(() => {
       axios
-        .get("https://resourcecovid.herokuapp.com/resource")
+        .get(`${environment.baseUrl}/resource`)
         .then((res) => setResources(res.data.data));
     }, 1000);
     setLoader(false);

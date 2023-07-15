@@ -25,9 +25,6 @@ function App() {
                   </a>
                 </h1>
                 <p className="brief">
-                  {/* A place where you can find all the help you need to fight this
-                  pandemic. We’re in this together. Share with your friends and
-                  family, your small step might save a life. */}
                   Disclaimer: This information is only contingent to the
                   availability of the resources. We do not guarantee quality or
                   genuineness of the seller, we highly advise you to cross check
