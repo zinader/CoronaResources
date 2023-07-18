@@ -2,6 +2,8 @@
 
 Corona Resources Portal is a web application developed to connect COVID-19 patients in India with critical resources such as oxygen cylinders and hospital beds. This project aims to provide a platform where users can easily find and access the necessary resources during these challenging times.
 
+Access deployed application at https://64b6ec1baf2fd303c89d21ae--elaborate-kulfi-a9d989.netlify.app/
+
 ## Features
 
 - Search for available resources such as oxygen cylinders and hospital beds
